@@ -1,0 +1,11 @@
+{% extends "notes/base.html" %}
+
+{% block title %}Logged Out - My Blog{% endblock %}
+
+{% block content %}
+<h1>You have been logged out</h1>
+
+<p><a href="{% url 'login' %}" class="btn">Login again</a></p>
+
+<p><a href="{% url 'home' %}" class="btn">Go to Home</a></p>
+{% endblock %}

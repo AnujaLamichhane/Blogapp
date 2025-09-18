@@ -1,0 +1,91 @@
+{#{% extends "notes/base.html" %}#}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>{{ blog.title }}</title>#}
+{##}
+{#</head>#}
+{#<body>#}
+{#<h1>{{ blog.title }}</h1>#}
+{#<p>by{{ blog.author.username }} on {{ blog.created_date }}</p>#}
+{#<div>#}
+{##}
+{#        {% if blog.image %}#}
+{#            <img src="{{ blog.image.url }}" alt="Blog image" width="300">#}
+{#        {% endif %}#}
+{#        <p> {{ blog.content }} </p>#}
+{#        </div>#}
+{#<a href="{%  url 'home'  %}"> </a>#}
+{##}
+{#<hr>#}
+{##}
+{#<h2>Comments</h2>#}
+{#<ul>#}
+{#    {% for comment in comments %}#}
+{#        <li><b>{{ comment.author.username }}:</b> {{ comment.content }} <br>#}
+{#        <small>{{ comment.created_time }}</small></li>#}
+{#    {% empty %}#}
+{#        <li>No comments yet. Be the first!</li>#}
+{#    {% endfor %}#}
+{#</ul>#}
+{##}
+{##}
+{#<hr>#}
+{#{% if user.is_authenticated %}#}
+{#    <h3>Add a Comment</h3>#}
+{#    <form method="POST">#}
+{#        {% csrf_token %}#}
+{#        {{ form.as_p }}#}
+{#        <button type="submit">Post Comment</button>#}
+{#    </form>#}
+{#{% else %}#}
+{#    <p><a href="{% url 'login' %}">Login</a> to comment.</p>#}
+{#{% endif %}#}
+{##}
+{##}
+{#</body>#}
+{#</html>#}
+{% extends "notes/base.html" %}
+
+{% block title %}{{ blog.title }} - My Blog{% endblock %}
+
+{% block content %}
+<div class="blog-card">
+    <h1>{{ blog.title }}</h1>
+    <p><em>by {{ blog.author.username }} on {{ blog.created_date|date:"F j, Y" }}</em></p>
+
+    {% if blog.image %}
+        <img src="{{ blog.image.url }}" alt="{{ blog.title }}">
+    {% endif %}
+
+    <p>{{ blog.content }}</p>
+</div>
+
+<hr>
+
+<h2>Comments</h2>
+<ul>
+    {% for comment in comments %}
+        <li>
+            <b>{{ comment.author.username }}:</b> {{ comment.content }} <br>
+            <small>{{ comment.created_time|date:"F j, Y, H:i" }}</small>
+        </li>
+    {% empty %}
+        <li>No comments yet. Be the first to comment!</li>
+    {% endfor %}
+</ul>
+
+<hr>
+
+{% if user.is_authenticated %}
+    <h3>Add a Comment</h3>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn">Post Comment</button>
+    </form>
+{% else %}
+    <p><a href="{% url 'login' %}">Login</a> to comment.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,211 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>{% block title %}</title>{% endblock %}#}
+{#<style>#}
+{#    body {#}
+{#        background-color: lightcoral;#}
+{#        font-family: "Segoe UI", system-ui, sans-serif;#}
+{#        margin: 0;#}
+{#        padding: 0;#}
+{#    }#}
+{#    h1{#}
+{#        color: greenyellow;#}
+{#text-align: center;#}
+{#    margin-top: 20px;#}
+{#    }#}
+{#    p{#}
+{#        color: brown;#}
+{#        line-height: 1.5;#}
+{#        padding: 10px;#}
+{#    }#}
+{#    header a {#}
+{#            color: #fff;#}
+{#            margin: 0 15px;#}
+{#            text-decoration: none;#}
+{#            font-weight: bold;#}
+{#        }#}
+{#        header a:hover {#}
+{#            color: #ffd700;#}
+{#        }#}
+{#        .container {#}
+{#            max-width: 900px;#}
+{#            margin: 20px auto;#}
+{#            background: #fff;#}
+{#            padding: 20px;#}
+{#            border-radius: 10px;#}
+{#            box-shadow: 0 2px 6px rgba(0,0,0,0.1);#}
+{#        }#}
+{#        .btn {#}
+{#            display: inline-block;#}
+{#            padding: 10px 20px;#}
+{#            background:darkgreen;#}
+{#            color: white;#}
+{#            text-decoration:none;#}
+{#            border-radius: 5px;#}
+{#            transition: 0.3s;#}
+{#        }#}
+{#        .btn:hover {#}
+{#            background: blueviolet;#}
+{#        }#}
+{#        img {#}
+{#            border-radius: 10px;#}
+{#            margin-top: 10px;#}
+{#            max-width: 100%;#}
+{#        }#}
+{#</style>#}
+{#</head>#}
+{#<body>#}
+{# <header>#}
+{#        <h1>📝 My Blog</h1>#}
+{#        <nav>#}
+{#            <a href="{% url 'home' %}">Home</a>#}
+{#            <a href="{% url 'create_blog' %}">Write Blog</a>#}
+{#            {% if user.is_authenticated %}#}
+{#                <a href="{% url 'logout' %}">Logout</a>#}
+{#            {% else %}#}
+{#                <a href="{% url 'login' %}">Login</a>#}
+{#                <a href="{% url 'signup' %}">Signup</a>#}
+{#            {% endif %}#}
+{#        </nav>#}
+{#    </header>#}
+{##}
+{#    <div class="container">#}
+{#        {% block content %}{% endblock %}#}
+{#    </div>#}
+{##}
+{#</body>#}
+{#</html>#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}My Blog{% endblock %}</title>
+
+    <!-- Basic CSS for styling -->
+    <style>
+        /* Reset default browser styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body styling */
+        body {
+            font-family: Arial, sans-serif; /* Font style */
+            background-color: #f4f6f9; /* Light grey background */
+            color: #333; /* Text color */
+        }
+
+        /* Header styling */
+        header {
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        /* Navigation links */
+        header nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+        .form-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: 0 auto;  /* center the form */
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.form-container label {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.form-container input {
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.form-container input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+        header nav a:hover {
+            color: #ffd700; /* Gold color on hover */
+        }
+
+        /* Main content container */
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        /* Button styling */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Blog card styling */
+        .blog-card {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .blog-card img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>📝 My Blog</h1>
+    <nav>
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'create_blog' %}">Write Blog</a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'signup' %}">Signup</a>
+        {% endif %}
+    </nav>
+</header>
+
+<div class="container">
+    {% block content %}{% endblock %}
+</div>
+
+</body>
+</html>

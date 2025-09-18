@@ -1,0 +1,22 @@
+{% extends "notes/base.html" %}
+
+{% block title %}Login - My Blog{% endblock %}
+
+{% block content %}
+<h1>Login</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    <p>
+        <label>Username:</label>
+        <input type="text" name="username" placeholder="Enter your username">
+    </p>
+    <p>
+        <label>Password:</label>
+        <input type="password" name="password" placeholder="Enter your password">
+    </p>
+    <button type="submit" class="btn">Login</button>
+</form>
+
+<p>Don’t have an account? <a href="{% url 'signup' %}">Signup here</a></p>
+{% endblock %}

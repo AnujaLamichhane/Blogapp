@@ -1,0 +1,34 @@
+{#{% extends "notes/base.html" %}#}
+{#<!DOCTYPE html>#}
+{#<html lang="en" xmlns="http://www.w3.org/1999/html">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>create new blog</title>#}
+{#</head>#}
+{#<body>#}
+{#<h1>Write a New Blog</h1>#}
+{#<form method="post" enctype="multipart/form-data">#}
+{#    {% csrf_token %}#}
+{#    {{ form.as_p }}#}
+{#    < button type ="submit">post blog < /button>#}
+{#     <button type="submit">post blog</button>#}
+{#   </form>#}
+{#<p> <a href= "{% url "home" %}" > </a> </p>#}
+{#</body>#}
+{##}
+{#</html>#}
+{% extends "notes/base.html" %}
+
+{% block title %}Write a New Blog - My Blog{% endblock %}
+
+{% block content %}
+<h1>Write a New Blog</h1>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn">Post Blog</button>
+</form>
+
+<p><a href="{% url 'home' %}">← Back to Home</a></p>
+{% endblock %}

@@ -1,0 +1,68 @@
+{#{% extends "notes/base.html" %}#}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Blogsss</title>#}
+{#</head>#}
+{#<body>#}
+{##}
+{#{% if user.is_authenticated %}#}
+{#    <p>Welcome, {{ user.username }}!#}
+{#       <a href="{% url 'logout' %}">Logout</a>#}
+{#    </p>#}
+{#{% else %}#}
+{#    <p>#}
+{#       <a href="{% url 'login' %}">Login</a> |#}
+{#       <a href="{% url 'signup' %}">Signup</a>#}
+{#    </p>#}
+{#{% endif %}#}
+{##}
+{##}
+{##}
+{# <a href="{% url 'create_blog' %}">Write a Blog</a>#}
+{# <ul>#}
+{#{% for blog in blogs %}#}
+{#    <div style="margin-bottom: 20px; border-bottom: 1px solid #ccc; padding-bottom: 15px;">#}
+{#    <li>#}
+{##}
+{#    <a href="{% url 'blog_detail' blog.id %}">{{ blog.title }}</a>#}
+{##}
+{##}
+{#         by {{ blog.author.username }}</li>#}
+{##}
+{#     {% empty %}#}
+{##}
+{#        <li>No blogs yet!</li>#}
+{#        {% endfor %}#}
+{#</ul>#}
+{##}
+{#</body>#}
+{#</html>#}
+{##}
+{##}
+{% extends "notes/base.html" %}
+
+{% block title %}Home - My Blog{% endblock %}
+
+{% block content %}
+<h2>Latest Blogs</h2>
+
+{% for blog in blogs %}
+    <div class="blog-card">
+        <h3><a href="{% url 'blog_detail' blog.id %}">{{ blog.title }}</a></h3>
+        <p>by <strong>{{ blog.author.username }}</strong> on {{ blog.created_at|date:"F j, Y" }}</p>
+
+        {% if blog.image %}
+            <img src="{{ blog.image.url }}" alt="{{ blog.title }}">
+        {% endif %}
+
+        <p>{{ blog.content|truncatechars:150 }}</p>
+        <a class="btn" href="{% url 'blog_detail' blog.id %}">Read More</a>
+    </div>
+{% empty %}
+    <p>No blogs yet. Be the first to <a class="btn" href="{% url 'create_blog' %}">write one</a>!</p>
+{% endfor %}
+
+{% endblock %}
+
