@@ -57,7 +57,7 @@
             <img src="{{ blog.image.url }}" alt="{{ blog.title }}">
         {% endif %}
 
-        <p>{{ blog.content|truncatechars:150 }}</p>
+        <p>{{ blog.content|truncatechars:50 }}</p>
         <a class="btn" href="{% url 'blog_detail' blog.id %}">Read More</a>
     </div>
 {% empty %}
