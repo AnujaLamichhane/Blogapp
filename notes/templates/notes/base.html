@@ -1,214 +1,229 @@
-{#<!DOCTYPE html>#}
-{#<html lang="en">#}
-{#<head>#}
-{#    <meta charset="UTF-8">#}
-{#    <title>{% block title %}</title>{% endblock %}#}
-{#<style>#}
-{#    body {#}
-{#        background-color: lightcoral;#}
-{#        font-family: "Segoe UI", system-ui, sans-serif;#}
-{#        margin: 0;#}
-{#        padding: 0;#}
-{#    }#}
-{#    h1{#}
-{#        color: greenyellow;#}
-{#text-align: center;#}
-{#    margin-top: 20px;#}
-{#    }#}
-{#    p{#}
-{#        color: brown;#}
-{#        line-height: 1.5;#}
-{#        padding: 10px;#}
-{#    }#}
-{#    header a {#}
-{#            color: #fff;#}
-{#            margin: 0 15px;#}
-{#            text-decoration: none;#}
-{#            font-weight: bold;#}
-{#        }#}
-{#        header a:hover {#}
-{#            color: #ffd700;#}
-{#        }#}
-{#        .container {#}
-{#            max-width: 900px;#}
-{#            margin: 20px auto;#}
-{#            background: #fff;#}
-{#            padding: 20px;#}
-{#            border-radius: 10px;#}
-{#            box-shadow: 0 2px 6px rgba(0,0,0,0.1);#}
-{#        }#}
-{#        .btn {#}
-{#            display: inline-block;#}
-{#            padding: 10px 20px;#}
-{#            background:darkgreen;#}
-{#            color: white;#}
-{#            text-decoration:none;#}
-{#            border-radius: 5px;#}
-{#            transition: 0.3s;#}
-{#        }#}
-{#        .btn:hover {#}
-{#            background: blueviolet;#}
-{#        }#}
-{#        img {#}
-{#            border-radius: 10px;#}
-{#            margin-top: 10px;#}
-{#            max-width: 100%;#}
-{#        }#}
-{#</style>#}
-{#</head>#}
-{#<body>#}
-{# <header>#}
-{#        <h1>📝 My Blog</h1>#}
-{#        <nav>#}
-{#            <a href="{% url 'home' %}">Home</a>#}
-{#            <a href="{% url 'create_blog' %}">Write Blog</a>#}
-{#            {% if user.is_authenticated %}#}
-{#                <a href="{% url 'logout' %}">Logout</a>#}
-{#            {% else %}#}
-{#                <a href="{% url 'login' %}">Login</a>#}
-{#                <a href="{% url 'signup' %}">Signup</a>#}
-{#            {% endif %}#}
-{#        </nav>#}
-{#    </header>#}
-{##}
-{#    <div class="container">#}
-{#        {% block content %}{% endblock %}#}
-{#    </div>#}
-{##}
-{#</body>#}
-{#</html>#}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}My Blog{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 
-    <!-- Basic CSS for styling -->
     <style>
-        /* Reset default browser styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* Body styling */
         body {
-            font-family: Arial, sans-serif; /* Font style */
-            background-color: wheat; /* Light grey background */
-            color: olivedrab; /* Text color */
+        font-family: 'Poppins', sans-serif;
+            background: #fefefe; /* Light mode background */
+            color: #111;          /* Light mode text */
+            line-height: 1.6;
+            padding: 0 20px;
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
-        /* Header styling */
-        header {
-            background-color:saddlebrown;
-            color:lightgoldenrodyellow;
-            padding: 10px 20px 30px;
-            text-align: center;
-            margin-bottom: 30px;
-
+        /* Navbar */
+        .navbar {
+           display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #eee;
+            background: #ffffff; /* Light mode navbar background */
+            transition: background 0.3s ease;
         }
 
-        /* Navigation links */
-        header nav a {
-            color: lightgoldenrodyellow;
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #111;
+        }
+
+        .navbar nav a {
+            margin-left: 20px;
             text-decoration: none;
-            margin: 0 20px;
-            font-weight: bold;
-
-        }
-        .form-container {
-    display: flex;
-    flex-direction: column;
-    max-width: 400px;
-    margin: 0 auto;  /* center the form */
-    padding: 20px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-.form-container label {
-    margin-top: 10px;
-    font-weight: bold;
-}
-
-.form-container input {
-    padding: 10px;
-    margin-top: 5px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-}
-
-.form-container input:focus {
-    border-color: #007bff;
-    outline: none;
-}
-
-        header nav a:hover {
-            color: #ffd700; /* Gold color on hover */
+            font-weight: 500;
+            color: #555;
+            transition: color 0.3s ease;
         }
 
-        /* Main content container */
-        .container {
-            max-width: 500px;
-            margin: 20px auto;
-            padding: 30px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        .navbar nav a:hover {
+            color: #ff6b35; /* Accent color */
         }
 
-        /* Button styling */
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
+        .toggle-btn {
+            background: #111;
+            color: #fff;
+            border: none;
+            padding: 8px 14px;
+            margin-left: 15px;
             border-radius: 5px;
-            transition: 0.3s;
-            margin-top: 10px;
+            cursor: pointer;
         }
 
-        .btn:hover {
-            background-color: #0056b3;
+        .toggle-btn:hover {
+            background: gray;
         }
 
-        /* Blog card styling */
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+        }
+
+        .section-title {
+            font-size: 36px;
+            margin-bottom: 30px;
+            font-family: 'Playfair Display', serif;
+            color: #111;
+        }
+
+        /* Blog Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        /* =========================
+           BLOG CARD MODIFICATIONS
+           ========================= */
         .blog-card {
-            margin-bottom: 10px;
-            padding: 15px;
-            border-bottom: 1px solid #ccc;
+            background: #fff;
+            border-radius: 15px; /* modified from 12px to 15px */
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08); /* modified for subtle lift */
+            overflow: hidden;
+            padding: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-8px); /* modified from -5px to -8px */
+            box-shadow: 0 12px 24px rgba(0,0,0,0.12); /* enhanced hover shadow */
         }
 
         .blog-card img {
-            max-width: 100%;
-            border-radius: 40px;
-            margin-top: 10px;
+            width: 100%;
+            max-height: 180px;       /* modified from full height to 180px */
+            object-fit: contain;       /* keeps image proportion and crops nicely */
+            border-radius: 15px;     /* modified from 40px to 15px for modern look */
+            margin-bottom: 15px;     /* spacing below image */
         }
+
+        .blog-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .blog-card p {
+            color: #fbc63c;
+            margin-bottom: 15px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 10px 18px;
+            background: #ff6b35;
+            color: white;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #111;
+            color: #fff;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 40px;
+            border-top: 1px solid #eee;
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* =========================
+           DARK MODE MODIFICATIONS
+           ========================= */
+        body.dark-mode {
+            background: #121212;      /* modified from black to dark gray */
+            color: #ffffff;           /* modified from red to light gray */
+        }
+
+        body.dark-mode .blog-card {
+            background: #000000;      /* dark card background */
+            color: #357c37;
+            border: 1px solid #359698;
+        }
+
+        body.dark-mode .btn {
+            background: #ff6b35;      /* same accent for dark mode */
+            color: #fff;
+        }
+
+        body.dark-mode footer {
+            color: #aaa;
+            border-top: 1px solid #333;
+        }
+
     </style>
 </head>
 <body>
 
 <header>
-    <h1>📝 My Blog</h1>
-    <nav>
-        <a href="{% url 'home' %}">Home</a>
-        <a href="{% url 'create_blog' %}">Write Blog</a>
-        {% if user.is_authenticated %}
-            <a href="{% url 'logout' %}">Logout</a>
-        {% else %}
-            <a href="{% url 'login' %}">Login</a>
-            <a href="{% url 'signup' %}">Signup</a>
-        {% endif %}
-    </nav>
+    <div class="navbar">
+        <div class="logo">📝 My Blog</div>
+        <nav>
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'create_blog' %}">Write Blog</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}">Logout</a>
+            {% else %}
+                <a href="{% url 'login' %}">Login</a>
+                <a href="{% url 'signup' %}">Signup</a>
+            {% endif %}
+            <button class="toggle-btn" id="darkModeToggle">🌙</button>
+        </nav>
+    </div>
 </header>
 
 <div class="container">
     {% block content %}{% endblock %}
 </div>
 
+<footer>
+    <p>© 2025 My Blog | Built with ❤️ using Django</p>
+</footer>
+
+<script>
+    const toggleBtn = document.getElementById("darkModeToggle");
+
+    if (localStorage.getItem("dark-mode") === "enabled") {
+        document.body.classList.add("dark-mode");
+    }
+
+    toggleBtn.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+        if (document.body.classList.contains("dark-mode")) {
+            localStorage.setItem("dark-mode", "enabled");
+        } else {
+            localStorage.setItem("dark-mode", "disabled");
+        }
+    });
+</script>
+
+<!-- AOS Animation -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>AOS.init();</script>
+
 </body>
 </html>
+

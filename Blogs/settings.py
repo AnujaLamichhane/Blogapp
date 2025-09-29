@@ -38,16 +38,46 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'notes',
+    "crispy_forms",
+    "crispy_bootstrap5",# for Bootstrap 5
+    "django.contrib.sites", #required by all auth
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
+
+
+
+
+
+
 ]
 
+SITE_ID = 1
+
+AUTHENTICATION_BACKENDS =[
+    "django.contrib.auth.backends.ModelBackend",#default
+    "allauth.account.auth_backends.AuthenticationBackend",#for allauth
+
+]
+
+#redirect after login
+LOGIN_REDIRECT_URL="home"
+LOGOUT_REDIRECT_URL="home"
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+
 ]
 
 ROOT_URLCONF = 'Blogs.urls'
@@ -126,4 +156,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+LOGIN_URL = '/login/'  # Allauth and @login_required redirections
+ACCOUNT_LOGOUT_REDIRECT_URL = '/login/'
+
 

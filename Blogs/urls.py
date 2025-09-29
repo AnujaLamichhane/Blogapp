@@ -21,17 +21,13 @@ from django.conf.urls.static import static
 
 from Blogs import settings
 from notes import views
-#
-# urlpatterns = [
-#     path('admin/', admin.site.urls),
-#     path('', views.home, name='home'),
-#     path('blog/<int:blog_id>/', views.blog_detail, name='blog_detail'),
-# ]
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('notes.urls')),   # ✅ this connects notes app urls
+    path("accounts/", include("allauth.urls")),
+
 ]
 
 

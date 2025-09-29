@@ -60,9 +60,63 @@
         <p>{{ blog.content|truncatechars:50 }}</p>
         <a class="btn" href="{% url 'blog_detail' blog.id %}">Read More</a>
     </div>
+
 {% empty %}
     <p>No blogs yet. Be the first to <a class="btn" href="{% url 'create_blog' %}">write one</a>!</p>
 {% endfor %}
 
 {% endblock %}
 
+{#{% load static %}#}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#  <meta charset="UTF-8">#}
+{#  <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
+{#  <title>My Blog</title>#}
+{##}
+{#  <!-- Google Fonts -->#}
+{#  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">#}
+{##}
+{#  <!-- CSS -->#}
+{#  <link rel="stylesheet" href="{% static 'blog/style.css' %}">#}
+{#</head>#}
+{#<body>#}
+{#  <!-- Navbar -->#}
+{#  <header class="navbar">#}
+{#    <h1 class="logo">My Blog</h1>#}
+{#    <nav>#}
+{#      <a href="{% url 'home' %}">Home</a>#}
+{#      <a href="{% url 'write' %}">Write Blog</a>#}
+{#      <a href="{% url 'login' %}">Login</a>#}
+{#      <a href="{% url 'signup' %}">Signup</a>#}
+{#    </nav>#}
+{#  </header>#}
+{##}
+{#  <!-- Blog Section -->#}
+{#  <main class="container">#}
+{#    <h2 class="section-title">Latest Posts</h2>#}
+{#    <div class="grid">#}
+{#      {% for post in posts %}#}
+{#      <div class="post-card" data-aos="fade-up">#}
+{#        <h3>{{ post.title }}</h3>#}
+{#        <p>{{ post.content|truncatewords:25 }}</p>#}
+{#        <a href="{% url 'post_detail' post.id %}" class="btn">Read More</a>#}
+{#      </div>#}
+{#      {% empty %}#}
+{#      <p>No posts yet.</p>#}
+{#      {% endfor %}#}
+{#    </div>#}
+{#  </main>#}
+{##}
+{#  <!-- Footer -->#}
+{#  <footer>#}
+{#    <p>© {{ year }} My Blog. Built with ❤️ in Django.</p>#}
+{#  </footer>#}
+{##}
+{#  <!-- AOS Animation -->#}
+{#  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">#}
+{#  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>#}
+{#  <script>AOS.init();</script>#}
+{#</body>#}
+{#</html>#}

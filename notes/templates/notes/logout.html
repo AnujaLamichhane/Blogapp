@@ -3,9 +3,9 @@
 {% block title %}Logged Out - My Blog{% endblock %}
 
 {% block content %}
-<h1>You have been logged out</h1>
+<h1 class="mb-4">You have been logged out</h1>
 
-<p><a href="{% url 'login' %}" class="btn">Login again</a></p>
+<p><a href="{% url 'login' %}" class="btn  btn-primary me-2">Login again</a></p>
 
-<p><a href="{% url 'home' %}" class="btn">Go to Home</a></p>
+<p><a href="{% url 'home' %}" class="btn  btn-secondary">Go to Home</a></p>
 {% endblock %}
